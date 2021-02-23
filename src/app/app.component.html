@@ -2,7 +2,7 @@
 <button (click)="changeBack()">change Back Array</button>
 
 <div class="wrapper" [@filterAnimation]="myArr">
-  <ng-container *ngFor="let item of myArr">
+  <ng-container *ngFor="let item of test$|async">
     <div class="card">{{ item.name }} ({{item.pos}})</div>
   </ng-container>
 </div>

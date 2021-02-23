@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { trigger, transition, style, animate, query, stagger, keyframes } from '@angular/animations';
 import { setClassMetadata } from '@angular/core/src/r3_symbols';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -40,6 +42,10 @@ import { setClassMetadata } from '@angular/core/src/r3_symbols';
 })
 export class AppComponent
 {
+  public data$ = new BehaviorSubject<any[]>([]);
+  public test$ = this.data$.pipe(
+    map((a) => (a.map((a) => ({ ...a, ...{ pos: 4 } }))))
+  )
   myArr: any = [];
   origArr = ['das', 'ist', 'ein', 'test', 'mit', 'sehr', 'unterschiedlichen', 'Wörtern', 'wie', 'zum', 'Beispiel', 'bla', 'oder', 'blub', 'vielleicht', 'sogar', 'wurstbrot'].map((a) => ({ id: a, name: a, time: new Date(), pos: Math.floor(Math.random() * 2000) }));
   maxLength = 17;
@@ -52,6 +58,7 @@ export class AppComponent
   public changeArr(): void
   {
     this.myArr = [...this.myArr, this.origArr[Math.floor(Math.random() * this.origArr.length)]].sort((a, b) => (a.pos - b.pos));
+    this.data$.next(this.myArr);
   }
 
   public changeBack()
