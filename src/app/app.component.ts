@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { trigger, transition, style, animate, query, stagger, keyframes } from '@angular/animations';
+import { setClassMetadata } from '@angular/core/src/r3_symbols';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,27 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
       transition(':enter, * => 0, * => -1', []),
       transition('* => *', [
         query(':enter', [
-          style({ opacity: 0, width: '0px' }),
           stagger(50, [
-            animate('3000ms ease-out', style({ opacity: 1, width: '*' })),
+            // animate('3000ms ease-out', style({ opacity: 1, width: '*' })),
+            animate('5000ms linear',
+              keyframes([
+                style({ transform: 'scale(1)' }),
+                style({ transform: 'scale(0.8)' }),
+                style({ transform: 'scale(1)' }),
+                style({ transform: 'scale(0.8)' }),
+                style({ transform: 'scale(1)' }),
+                style({ transform: 'scale(0.8)' }),
+                style({ transform: 'scale(1)' }),
+                style({ transform: 'scale(0.8)' }),
+                style({ transform: 'scale(1)' }),
+                style({ transform: 'scale(0.8)' }),
+                style({ transform: 'scale(1)' }),
+                style({ transform: 'scale(0.8)' }),
+                style({ transform: 'scale(1)' }),
+                style({ transform: 'scale(0.8)' }),
+                style({ transform: 'scale(1)' }),
+              ])
+            ),
           ]),
         ], { optional: true })
       ]),
