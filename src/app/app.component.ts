@@ -40,26 +40,22 @@ import { setClassMetadata } from '@angular/core/src/r3_symbols';
 })
 export class AppComponent
 {
-  arrLength = 4;
-
-  myArr: string[] = [];
-  origArr = ['das', 'ist', 'ein', 'test', 'mit', 'sehr', 'unterschiedlichen', 'Wörtern', 'wie', 'zum', 'Beispiel', 'bla', 'oder', 'blub', 'vielleicht', 'sogar', 'wurstbrot'];
+  myArr: any = [];
+  origArr = ['das', 'ist', 'ein', 'test', 'mit', 'sehr', 'unterschiedlichen', 'Wörtern', 'wie', 'zum', 'Beispiel', 'bla', 'oder', 'blub', 'vielleicht', 'sogar', 'wurstbrot'].map((a) => ({ id: a, name: a, time: new Date(), pos: Math.floor(Math.random() * 2000) }));
   maxLength = 17;
 
   ngOnInit(): void
   {
-    this.myArr = this.origArr.slice(0, 4);
+    this.myArr = []
   }
 
   public changeArr(): void
   {
-    if (this.arrLength < this.maxLength) this.arrLength++;
-    this.myArr = this.origArr.slice(0, this.arrLength);
+    this.myArr = [...this.myArr, this.origArr[Math.floor(Math.random() * this.origArr.length)]].sort((a, b) => (a.pos - b.pos));
   }
 
   public changeBack()
   {
-    if (this.arrLength > 1) this.arrLength--;
-    this.myArr = this.origArr.slice(0, this.arrLength);
+    this.myArr = []
   }
 }

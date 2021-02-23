@@ -3,6 +3,6 @@
 
 <div class="wrapper" [@filterAnimation]="myArr">
   <ng-container *ngFor="let item of myArr">
-    <div class="card">{{ item }}</div>
+    <div class="card">{{ item.name }} ({{item.pos}})</div>
   </ng-container>
 </div>
